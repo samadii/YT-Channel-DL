@@ -1,0 +1,9 @@
+asyncio
+hachoir
+pyrogram
+tgcrypto
+youtube_dl
+uuid
+ffmpeg-python
+urllib3
+selenium
