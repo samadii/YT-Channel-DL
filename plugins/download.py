@@ -51,8 +51,8 @@ LOGGER = logging.getLogger(__name__)
         time_to_completion = round((total - current) / speed) * 1000
         estimated_total_time = elapsed_time + time_to_completion
 
-        elapsed_time = TimeFormatter(milliseconds=elapsed_time)
-        estimated_total_time = TimeFormatter(milliseconds=estimated_total_time)
+        elapsed_time = time_formatter(milliseconds=elapsed_time)
+        estimated_total_time = time_formatter(milliseconds=estimated_total_time)
 
         progress = "[{0}{1}] \nP: {2}%\n".format(
             ''.join(["█" for i in range(math.floor(percentage / 5))]),
