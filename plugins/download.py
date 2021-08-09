@@ -131,7 +131,6 @@ async def uloader(client, message):
         return await client.send_message(message.chat.id, '`I think this is invalid link...`', reply_to_message_id=message.message_id)
 
         input = message.text.split(None, 1)[0]
-        typee = message.text.split(None, 1)[1]
         url = f"{input}"
         chrome_options = Options()
         chrome_options.add_argument("--user-data-dir=chrome-data")
@@ -141,19 +140,6 @@ async def uloader(client, message):
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
         driver.get(url)
-        time.sleep(5)
-        dt=datetime.datetime.now().strftime("%Y%m%d%H%M")
-        height = driver.execute_script("return document.documentElement.scrollHeight")
-        lastheight = 0
-
-        while True:
-            if lastheight == height:
-                break
-            lastheight = height
-            driver.execute_script("window.scrollTo(0, " + str(height) + ");")
-            time.sleep(2)
-            height = driver.execute_script("return document.documentElement.scrollHeight")
-
         user_data = driver.find_elements_by_xpath('//*[@id="video-title"]')
         for i in user_data:
             result = i.get_attribute('href')
