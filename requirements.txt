@@ -7,4 +7,3 @@ uuid
 ffmpeg-python
 urllib3
 selenium
-pyyoutube
