@@ -8,4 +8,5 @@ Click below button to deploy.
 
 ## 📌 Credits
 - [Youtube-DL](https://youtube-dl.org) for Youtube-DL python
-- [Me](https://github.com/samadii) for this Project 🤪
+- [AnjanaMadu](https://github.com/AnjanaMadu) for [YTPlaylistDL](https://github.com/AnjanaMadu/YTPlaylistDL)
+- [Me](https://github.com/Soebb)
