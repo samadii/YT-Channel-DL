@@ -4,9 +4,8 @@ _A Telegram bot to download youtube channel contents and upload them to telegram
 ## 📌 Deploy to Heroku
 Click below button to deploy.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Soebb/YT-Channel-DL)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/samadii/YT-Channel-DL)
 
 ## 📌 Credits
-- [Youtube-DL](https://youtube-dl.org) for Youtube-DL python
-- [AnjanaMadu](https://github.com/AnjanaMadu) for [YTPlaylistDL](https://github.com/AnjanaMadu/YTPlaylistDL)
-- [Me](https://github.com/Soebb)
+- [AnjanaMadu](https://github.com/AnjanaMadu) for his [YTPlaylistDL](https://github.com/AnjanaMadu/YTPlaylistDL)
+- [Me](https://github.com/samadii)
