@@ -32,7 +32,7 @@ Click below button to deploy.
 
 7. Run the file
    ```
-   python3 main.py
+   python3 bot.py
    ```
 
 ## 📌 Credits
