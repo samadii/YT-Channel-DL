@@ -8,9 +8,7 @@ import os, unittest, time, datetime
 import urllib.request, urllib.error, urllib.parse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import InvalidArgumentException
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from pyrogram import Client, filters
 from youtube_dl import YoutubeDL
@@ -24,6 +22,9 @@ from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant, UserBannedInChannel
 import shutil
+
+# system path to chromedriver.exe
+CHROMEDRIVER_PATH = r" "
 
 is_downloading = False
 
@@ -133,18 +134,23 @@ async def uloader(client, message):
     else:
         return await client.send_message(message.chat.id, '`I think this is invalid link...`', reply_to_message_id=message.message_id)
 
-        input = message.text.split(None, 1)[0]
-        url = f"{input}"
-        chrome_options = Options()
-        chrome_options.add_argument("--user-data-dir=chrome-data")
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
-        driver.get(url)
-        user_data = driver.find_elements_by_xpath('//*[@id="video-title"]')
-        for i in user_data:
+        url = message.text.split(None, 1)[0]
+        if (os.environ.get("USE_HEROKU") == "True"):
+            chrome_options = Options()
+            chrome_options.add_argument('--disable-gpu')
+            chrome_options.add_argument('--no-sandbox')
+            chrome_options.headless = True
+            chrome_options.binary_location = "/app/.apt/usr/bin/google-chrome"
+            driver = webdriver.Chrome(executable_path="/app/.chromedriver/bin/chromedriver", options=chrome_options)
+            driver.get(url)
+            links = driver.find_elements_by_xpath('//*[@id="video-title"]')
+        else:
+            chrome_options = webdriver.ChromeOptions()
+            ser = Service(CHROMEDRIVER_PATH)
+            driver = webdriver.Chrome(service=ser, options=chrome_options)
+            driver.get(url)
+            links = driver.find_elements(By.XPATH, '//*[@id="video-title"]')
+        for i in links:
             result = i.get_attribute('href')
 
     out_folder = f"downloads/{uuid.uuid4()}/"
