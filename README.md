@@ -14,9 +14,10 @@ Click below button to deploy.
    git clone https://github.com/samadii/YT-Channel-DL
    ```
 
-2. Install [Google Chrome](https://support.google.com/chrome/answer/95346?hl=en&co=GENIE.Platform%3DDesktop) and [ChromeDriver](https://chromedriver.chromium.org/downloads).
+2. Install [FFmpeg](www.ffmpeg.org) & [Google Chrome](https://support.google.com/chrome/answer/95346?hl=en&co=GENIE.Platform%3DDesktop) and [ChromeDriver](https://chromedriver.chromium.org/downloads).
 
 3. Add ChromeDriver folder path to your System PATH environment variable.
+Also add ffmpeg bin folder path.
 
 4. Go to [this line](https://github.com/samadii/YT-Channel-DL/blob/main/plugins/download.py#L27) and add path where chromedriver is there.
 
