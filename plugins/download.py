@@ -1,4 +1,3 @@
-import ffmpeg
 import uuid
 import math
 import asyncio
@@ -117,7 +116,6 @@ def ytdl_dowload(result, opts):
 async def uloader(client, message):
 
     global is_downloading
-
     fsub = os.environ.get("UPDTE_CHNL")
     if fsub:
         if not (await pyro_fsub(client, message, fsub) == True):
@@ -174,6 +172,7 @@ async def uloader(client, message):
     elif (os.environ.get("USE_HEROKU") == "False") and (typee == "audio"):
         opts = {
             'format':'bestaudio',
+            'cachedir':False,
             'addmetadata':True,
             'key':'FFmpegMetadata',
             'prefer_ffmpeg':True,
@@ -194,6 +193,7 @@ async def uloader(client, message):
     if (os.environ.get("USE_HEROKU") == "False") and (typee == "video"):
         opts = {
             'format':'best',
+            'cachedir':False,
             'addmetadata':True,
             'xattrs':True,
             'key':'FFmpegMetadata',
