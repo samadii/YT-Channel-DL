@@ -2,7 +2,7 @@ asyncio
 hachoir
 pyrogram
 tgcrypto
-youtube_dl
+yt_dlp
 uuid
 urllib3
 selenium
