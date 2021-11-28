@@ -220,7 +220,7 @@ async def uloader(client, message):
                 if single_file.endswith((".mp4", ".mp3", ".flac", ".m4a", ".webm")):
                     try:
                         audio_name = os.path.basename(single_file)
-                        audioname = audio_name.replace(".mp3", " ").replace(".webm", " ").replace(".m4a", " ").replace(".flac", " ").replace(".mp4", " ")
+                        audioname = audio_name.replace('.'+audio_name.rsplit(".", 1)[1], '')
                         tnow = time.time()
                         fduration, fwidth, fheight = get_metadata(single_file)
                         await message.reply_chat_action("upload_audio")
@@ -228,7 +228,12 @@ async def uloader(client, message):
                             message.chat.id,
                             single_file,
                             caption=f"`{audioname}`",
-                            duration=fduration)
+                            duration=fduration,
+                            progress=progress_bar,
+                            progress_args=(
+                                "Uploading..", msg, c_time
+                            )
+                        )
                     except Exception as e:
                         await msg.edit("{} caused `{}`".format(single_file, str(e)))
                         continue
@@ -245,7 +250,7 @@ async def uloader(client, message):
                 if single_file.endswith((".mp4", ".m4a", ".mp3", ".flac", ".webm")):
                     try:
                         video_name = os.path.basename(single_file)
-                        videoname = video_name.replace(".mp3", " ").replace(".webm", " ").replace(".m4a", " ").replace(".flac", " ").replace(".mp4", " ")
+                        videoname = video_name.replace('.'+video_name.rsplit(".", 1)[1], '')
                         tnow = time.time()
                         fduration, fwidth, fheight = get_metadata(single_file)
                         await message.reply_chat_action("upload_video")
@@ -256,7 +261,12 @@ async def uloader(client, message):
                             supports_streaming=True,
                             duration=fduration,
                             width=fwidth,
-                            height=fheight)
+                            height=fheight,
+                            progress=progress_bar,
+                            progress_args=(
+                                "Uploading..", msg, c_time
+                            )
+                        )
                     except Exception as e:
                         await msg.edit("{} caused `{}`".format(single_file, str(e)))
                         continue
