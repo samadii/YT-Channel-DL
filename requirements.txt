@@ -5,4 +5,3 @@ tgcrypto
 yt_dlp
 uuid
 urllib3
-selenium
