@@ -99,13 +99,16 @@ def ytdl_dowload(result, opts):
         is_downloading = False
         print(e)
 
+
+UPDTE_CHNL = os.environ.get("UPDTE_CHNL")
+LOG_CHNL = os.environ.get("LOG_CHNL")
+
 @Client.on_message(filters.regex(pattern=".*http.* (.*)"))
 async def uloader(client, message):
-
     global is_downloading
-    fsub = os.environ.get("UPDTE_CHNL")
-    if fsub:
-        if not (await pyro_fsub(client, message, fsub) == True):
+
+    if UPDTE_CHNL:
+        if not (await pyro_fsub(client, message, UPDTE_CHNL) == True):
             return
 
     if is_downloading:
@@ -195,9 +198,8 @@ async def uloader(client, message):
         video = True
     is_downloading = True
 
-    logchnl = os.environ.get("LOG_CHNL")
-    if logchnl:
-        await client.send_message(logchnl, f"Name: {message.from_user.mention}\nURL: {url} {typee}")
+    if LOG_CHNL:
+        await client.send_message(LOG_CHNL, f"Name: {message.from_user.mention}\nURL: {url} {typee}")
 
     try:
         await msg.edit("`Downloading...`")
@@ -315,16 +317,16 @@ async def pyro_fsub(c, message, fsub):
                 parse_mode="markdown",
                 disable_web_page_preview=True
             )
+            return False
         return True
     except UserNotParticipant:
-        chnl = os.environ.get("UPDTE_CHNL")
         await c.send_message(
             chat_id=message.chat.id,
             text="**Please Join My Updates Channel to Use Me!**",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("Join Now", url=f"https://t.me/{chnl}")
+                        InlineKeyboardButton("Join Now", url=f"https://t.me/{UPDTE_CHNL}")
                     ]
                 ]
             )
